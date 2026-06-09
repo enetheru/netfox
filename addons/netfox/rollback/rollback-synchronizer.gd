@@ -72,7 +72,7 @@ var _properties_dirty: bool = false
 static var _managed_roots := {} # root node to RollbackSynchronizer
 
 @onready var _logger: NetfoxLogger = NetfoxLogger._for_netfox("RollbackSynchronizer:" + root.name)
-@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+var NetworkTime:_NetworkTime = Netfox.NetworkTime
 @onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
 @onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
 @onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer

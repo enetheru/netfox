@@ -29,12 +29,12 @@ func _execute() -> void:
 		await get_tree().create_timer(1.0).timeout
 		search_time += 1.0
 
-		var response:NohubResult.LobbyList = await ForestBrawlConnector.nohub().list_lobbies()
-		if not response.is_success():
-			status_label.text = "nohub error: %s" % [response.error().message]
+		var lobby_list := await ForestBrawlConnector.nohub().list_lobbies()
+		if not lobby_list.is_success():
+			status_label.text = "nohub error: %s" % [lobby_list.error().message]
 
 		# Only consider quick-play lobbies
-		var lobbies := response.value()\
+		var lobbies := lobby_list.value()\
 			.filter(func (it: NohubLobby):
 				return it.data.get("quick-play", "") == "enabled" or expanded_search
 				)

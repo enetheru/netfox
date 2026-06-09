@@ -150,8 +150,8 @@ func _connect_to_services(p_noray_address: String, p_nohub_address: String) -> E
 	_logger.info("Success!")
 
 	# Success
-	_noray_address = "%s:%d" % noray_address
-	_nohub_address = "%s:%d" % nohub_address
+	_noray_address = "%s:%d" % dest_noray_address
+	_nohub_address = "%s:%d" % dest_nohub_address
 
 	return OK
 
