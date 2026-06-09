@@ -23,6 +23,12 @@ class_name PredictiveSynchronizer
 ## the tick.
 @export var state_properties: Array[String]
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
+@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
+@onready var RollbackLivenessServer:_RollbackLivenessServer = Netfox.RollbackLivenessServer
+
 var _state_properties := _PropertyPool.new()
 var _sim_nodes: Array[Node] = []
 var _liveness_nodes: Array[Node] = []

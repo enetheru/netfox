@@ -25,6 +25,8 @@ class_name TickInterpolator
 ## whenever properties are updated.
 @export var enable_recording: bool = true
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 var _state_from: _PropertySnapshot
 var _state_to: _PropertySnapshot
 var _property_entries: Array[PropertyEntry] = []

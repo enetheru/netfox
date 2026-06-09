@@ -20,6 +20,9 @@ class_name _NetworkIdentityServer
 ## nodes ( like RollbackSynchronizer ), and usually doesn't need to be done
 ## manually.
 
+@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
+@onready var NetworkEvents:_NetworkEvents = Netfox.NetworkEvents
+
 var _command_server: _NetworkCommandServer
 
 var _next_id := 0

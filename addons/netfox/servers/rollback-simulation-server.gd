@@ -17,6 +17,11 @@ class_name _RollbackSimulationServer
 ## to simulate the node. Only one [Callable] can be actively registered per
 ## node.
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
+@onready var RollbackLivenessServer:_RollbackLivenessServer = Netfox.RollbackLivenessServer
+@onready var NetworkPerformance:_NetworkPerformance = Netfox.NetworkPerformance
+
 var _history_server: _NetworkHistoryServer
 var _liveness_server: _RollbackLivenessServer
 

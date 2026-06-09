@@ -7,6 +7,11 @@ class_name _NetworkTime
 ##
 ## @tutorial(NetworkTime Guide): https://foxssake.github.io/netfox/latest/netfox/guides/network-time/
 
+@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
+@onready var NetworkSynchronizationServer:_NetworkSynchronizationServer = Netfox.NetworkSynchronizationServer
+@onready var NetworkIdentityServer:_NetworkIdentityServer = Netfox.NetworkIdentityServer
+@onready var NetworkTimeSynchronizer:_NetworkTimeSynchronizer = Netfox.NetworkTimeSynchronizer
+
 ## Number of ticks per second.
 ## [br][br]
 ## [i]read-only[/i], you can change this in the project settings

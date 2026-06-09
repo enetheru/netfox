@@ -35,5 +35,5 @@ func _write_identifier(subject: Object, peer: int, buffer: StreamPeerBuffer) -> 
 
 func _get_identity_server() -> _NetworkIdentityServer:
 	if not _identity_server:
-		_identity_server = NetworkIdentityServer
+		_identity_server = Netfox.NetworkIdentityServer
 	return _identity_server

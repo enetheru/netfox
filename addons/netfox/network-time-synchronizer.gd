@@ -15,6 +15,8 @@ class_name _NetworkTimeSynchronizer
 ## See [member sync_interval]
 const MIN_SYNC_INTERVAL := 0.1
 
+@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
+
 ## Time between sync samples, in seconds.
 ## Cannot be less than [member MIN_SYNC_INTERVAL]
 ## [br][br]

@@ -8,6 +8,13 @@ class_name _NetworkRollback
 ## @tutorial(NetworkRollback Guide): https://foxssake.github.io/netfox/latest/netfox/guides/network-rollback/
 ## @tutorial(Modifying objects during rollback): https://foxssake.github.io/netfox/latest/netfox/tutorials/modifying-objects-during-rollback/
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
+@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
+@onready var RollbackLivenessServer:_RollbackLivenessServer = Netfox.RollbackLivenessServer
+@onready var NetworkSynchronizationServer:_NetworkSynchronizationServer = Netfox.NetworkSynchronizationServer
+
 ## Whether rollback is enabled.
 var enabled: bool = ProjectSettings.get_setting(&"netfox/rollback/enabled", true)
 

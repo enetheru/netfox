@@ -15,6 +15,9 @@ const FULL_STATE_PROPERTIES_COUNT: StringName = &"netfox/Full state properties c
 const SENT_STATE_PROPERTIES_COUNT: StringName = &"netfox/Sent state properties count"
 const SENT_STATE_PROPERTIES_RATIO: StringName = &"netfox/Sent state properties ratio"
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+
 var _network_loop_start: float = 0
 var _network_loop_duration: float = 0
 

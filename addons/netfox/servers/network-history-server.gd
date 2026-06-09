@@ -12,6 +12,9 @@ class_name _NetworkHistoryServer
 ## and enables [_NetworkSynchronizationServer] to send diff states by comparing
 ## against historical data.
 
+var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
+
 var _rb_input_properties := _PropertyPool.new()
 var _rb_state_properties := _PropertyPool.new()
 var _sync_state_properties := _PropertyPool.new()

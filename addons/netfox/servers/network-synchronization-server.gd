@@ -16,6 +16,15 @@ class_name _NetworkSynchronizationServer
 ## Optionally, diff states can be used, sending only the property values that
 ## have changed, saving on bandwidth.
 
+var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
+@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
+@onready var NetworkIdentityServer:_NetworkIdentityServer = Netfox.NetworkIdentityServer
+@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
+@onready var NetworkPerformance:_NetworkPerformance = Netfox.NetworkPerformance
+
+const Command = _NetworkCommandServer.Command
+
 # Dependencies
 var _command_server: _NetworkCommandServer
 var _history_server: _NetworkHistoryServer
@@ -54,12 +63,12 @@ var _dense_serializer: _DenseSnapshotSerializer
 var _sparse_serializer: _SparseSnapshotSerializer
 var _redundant_serializer: _RedundantSnapshotSerializer
 
-var _cmd_full_state: NetworkCommandServer.Command
-var _cmd_diff_state: NetworkCommandServer.Command
-var _cmd_input: NetworkCommandServer.Command
+var _cmd_full_state: Command
+var _cmd_diff_state: Command
+var _cmd_input: Command
 
-var _cmd_full_sync: NetworkCommandServer.Command
-var _cmd_diff_sync: NetworkCommandServer.Command
+var _cmd_full_sync: Command
+var _cmd_diff_sync: Command
 
 static var _logger := NetfoxLogger._for_netfox("NetworkSynchronizationServer")
 

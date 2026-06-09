@@ -30,6 +30,10 @@ var full_state_interval: int = 24
 @export_range(0, 128, 1, "or_greater")
 var diff_ack_interval: int = 0
 
+@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
+@onready var NetworkSynchronizationServer:_NetworkSynchronizationServer = Netfox.NetworkSynchronizationServer
+@onready var NetworkIdentityServer:_NetworkIdentityServer = Netfox.NetworkIdentityServer
+
 ## Decides which peers will receive updates
 var visibility_filter := PeerVisibilityFilter.new()
 

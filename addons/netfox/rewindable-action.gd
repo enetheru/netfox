@@ -15,6 +15,9 @@ enum {
 	CANCELLING
 }
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 var _active_ticks: _Set = _Set.new()
 var _last_set_tick: int = -1
 

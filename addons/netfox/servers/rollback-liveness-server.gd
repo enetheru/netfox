@@ -14,6 +14,8 @@ class_name _RollbackLivenessServer
 ## given tick, and then gets despawned at another. Once the subject is despawned
 ## it can't be spawned again.
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+
 var _respawn_callback := {}
 var _despawn_callback := {}
 var _destroy_callback := {}

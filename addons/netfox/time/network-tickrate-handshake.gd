@@ -23,6 +23,8 @@ const ADJUST := 2
 ## This is emitted on both host and client.
 const SIGNAL := 3
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 ## Configures what happens on a tickrate mismatch.[br]
 ## Defaults to [constant WARN], based on project settings.
 var mismatch_action: int = ProjectSettings.get_setting(&"netfox/time/tickrate_mismatch_action", WARN)

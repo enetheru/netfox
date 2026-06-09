@@ -31,6 +31,9 @@ enum UpdateMode {
 	PER_ROLLBACK_TICK	## Update visibility [b]after[/b] each rollback tick
 }
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+
 ## Make all peers visible by default if true
 var default_visibility: bool = true
 ## Sets whether and when automatic visibility updates should happen

@@ -41,6 +41,8 @@ signal on_peer_join(id: int)
 ## Event emitted when a peer leaves the game.
 signal on_peer_leave(id: int)
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 ## Whether the events are enabled.
 ## [br][br]
 ## Events are only emitted when it's enabled. Disabling this can free up some
