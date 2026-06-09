@@ -7,6 +7,9 @@ class_name BrawlerSpawner
 @export var joining_screen: Control
 @export var name_input: LineEdit
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+@onready var NetworkEvents:_NetworkEvents = Netfox.NetworkEvents
+
 var spawn_host_avatar: bool = true
 var avatars: Dictionary = {}
 

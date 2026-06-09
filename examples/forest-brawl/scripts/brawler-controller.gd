@@ -1,6 +1,9 @@
 extends CharacterBody3D
 class_name BrawlerController
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 # Stats
 @export var speed: float = 5.0
 @export var jump_velocity: float = 4.5

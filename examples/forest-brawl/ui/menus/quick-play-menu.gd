@@ -29,7 +29,7 @@ func _execute() -> void:
 		await get_tree().create_timer(1.0).timeout
 		search_time += 1.0
 
-		var response := await ForestBrawlConnector.nohub().list_lobbies()
+		var response:NohubResult.LobbyList = await ForestBrawlConnector.nohub().list_lobbies()
 		if not response.is_success():
 			status_label.text = "nohub error: %s" % [response.error().message]
 
@@ -67,7 +67,7 @@ func _host() -> void:
 	status_label.text = "Creating lobby..."
 
 	# Create lobby
-	var lobby_name := "Quick Play #%x" % [randi_range(0x10000000, 0xFFFFFFFF)]
+	var _lobby_name := "Quick Play #%x" % [randi_range(0x10000000, 0xFFFFFFFF)]
 	var player_capacity := 8
 	var address := "noray://%s/%s" % [ForestBrawlConnector.noray_address(), Noray.oid]
 

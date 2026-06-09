@@ -1,6 +1,9 @@
 extends AnimatableBody3D
 class_name MovingPlatform
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 @export var speed: float = 2.
 @onready var _origin: Vector3 = global_position
 @onready var _target: Vector3 = $Target.global_position

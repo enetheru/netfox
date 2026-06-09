@@ -3,6 +3,8 @@ class_name BaseNetInput
 
 ## Base class for Input nodes used with rollback.
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 func _ready():
 	NetworkTime.before_tick_loop.connect(func():
 		if is_multiplayer_authority():

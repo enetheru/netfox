@@ -3,6 +3,8 @@ extends Area3D
 @export var effects: Array[PackedScene] = []
 @export var cooldown: float = 30.0
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 var is_active: bool = true
 var fade_speed: float = 8.0
 

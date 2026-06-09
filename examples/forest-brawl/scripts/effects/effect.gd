@@ -6,6 +6,9 @@ class_name Effect
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 var _apply_tick: int = 0
 var _cease_tick: int = 0
 var _destroy_tick: int = 0

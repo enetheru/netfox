@@ -10,13 +10,16 @@ var distance_left: float
 var fired_by: Node
 var ghost_cooldown := 0
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 @onready var animation_player := $AnimationPlayer as AnimationPlayer
 @onready var animation_tree := $AnimationTree as AnimationTree
 @onready var tick_interpolator := $TickInterpolator as TickInterpolator
 @onready var synchronizer := $PredictiveSynchronizer as PredictiveSynchronizer
 
 @onready var _original_mask := collision_mask
-@onready var _logger := NetfoxLogger.new("fb", self.name)
+#@onready var _logger := NetfoxLogger.new("fb", self.name)
 
 var _explosion: Node3D = null
 var _exploded_tick: int = -1

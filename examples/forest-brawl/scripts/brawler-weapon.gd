@@ -4,6 +4,8 @@ class_name BrawlerWeapon
 @export var projectile: PackedScene
 @export var fire_cooldown: float = 0.15
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 @onready var input := $"../Input" as BrawlerInput
 @onready var sound: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var fire_action := $"Fire Action" as RewindableAction

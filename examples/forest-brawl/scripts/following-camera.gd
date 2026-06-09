@@ -6,7 +6,7 @@ class_name FollowingCamera
 @export var target: Node3D
 
 func _ready():
-	NetworkTime.on_tick.connect(_tick)
+	Netfox.NetworkTime.on_tick.connect(_tick)
 
 func _tick(delta: float, _t: int):
 	if not target:

@@ -13,6 +13,8 @@ class ServiceHosts:
 
 const GAME_ID := "WK6koYfZ7cEMjcsba3ovxQF1lM9XjkWh"
 
+@onready var NetworkEvents:_NetworkEvents = Netfox.NetworkEvents
+
 static var known_service_hosts: Array[ServiceHosts] = [
 	ServiceHosts.new("foxssake.studio", "foxssake.studio:8890", "foxssake.studio:12980"),
 	ServiceHosts.new("localhost", "localhost:8890", "localhost:9980")
@@ -73,9 +75,9 @@ static func join_noray(oid: String) -> Error:
 	assert(_instance, "ForestBrawlConnector instance missing from Scene Tree!")
 	return _instance._join_noray(oid)
 
-static func host_lobby(name: String, address: String, max_players: int = 8) -> NohubResult.Lobby:
+static func host_lobby(lobby_name: String, address: String, max_players: int = 8) -> NohubResult.Lobby:
 	assert(_instance, "ForestBrawlConnector instance missing from Scene Tree!")
-	return await _instance._host_lobby(name, address, max_players)
+	return await _instance._host_lobby(lobby_name, address, max_players)
 
 static func host_quick_play(address: String, max_players: int = 8) -> NohubResult.Lobby:
 	assert(_instance, "ForestBrawlConnector instance missing from Scene Tree!")
@@ -92,12 +94,12 @@ static func update_player_count(player_count: int) -> void:
 func _connect_to_services(p_noray_address: String, p_nohub_address: String) -> Error:
 	_disconnect_from_services()
 
-	var noray_address = _parse_address(p_noray_address, 8890)
-	var nohub_address = _parse_address(p_nohub_address, 12980)
+	var dest_noray_address = _parse_address(p_noray_address, 8890)
+	var dest_nohub_address = _parse_address(p_nohub_address, 12980)
 
 	# Connect to noray
-	_logger.info("Connecting to noray at %s:%d...", [noray_address[0], noray_address[1]])
-	var err := await Noray.connect_to_host(noray_address[0], noray_address[1])
+	_logger.info("Connecting to noray at %s:%d...", [dest_noray_address[0], dest_noray_address[1]])
+	var err := await Noray.connect_to_host(dest_noray_address[0], dest_noray_address[1])
 	if err != OK:
 		_logger.info("Failed to connect to noray: %s" % [error_string(err)])
 		_disconnect_from_services()
@@ -105,9 +107,9 @@ func _connect_to_services(p_noray_address: String, p_nohub_address: String) -> E
 	_logger.info("Successfully connected to noray!")
 
 	# Connect to nohub
-	_logger.info("Connecting to nohub at %s:%d...", [noray_address[0], noray_address[1]])
+	_logger.info("Connecting to nohub at %s:%d...", [dest_noray_address[0], dest_noray_address[1]])
 	var peer := StreamPeerTCP.new()
-	peer.connect_to_host(nohub_address[0], nohub_address[1])
+	peer.connect_to_host(dest_nohub_address[0], dest_nohub_address[1])
 	while true:
 		peer.poll()
 		match peer.get_status():
@@ -186,12 +188,12 @@ func _join(address: String) -> Error:
 func _join_noray(oid: String) -> Error:
 	return _noray_connector.join(oid, ForestBrawlSettings.get_active().force_relay)
 
-func _host_lobby(name: String, address: String, max_players: int = 8, extra_data: Dictionary = {}) -> NohubResult.Lobby:
+func _host_lobby(lobby_name: String, address: String, max_players: int = 8, extra_data: Dictionary = {}) -> NohubResult.Lobby:
 	if not _nohub_client:
 		return NohubResult.of_error("NotConnectedError", "No nohub client present!")
 
 	# TODO(nohub.gd): Stringify data values
-	var base_data := { "name": name, "player-count": "0", "player-capacity": str(max_players) }
+	var base_data := { "name": lobby_name, "player-count": "0", "player-capacity": str(max_players) }
 	var data := extra_data.duplicate()
 	data.merge(base_data, true)
 
@@ -201,8 +203,8 @@ func _host_lobby(name: String, address: String, max_players: int = 8, extra_data
 	return response
 
 func _host_quick_play(address: String, max_players: int = 8) -> NohubResult.Lobby:
-	var name := "Quick Play #%x" % [randi_range(0x10000000, 0xFFFFFFFF)]
-	return await _host_lobby(name, address, max_players, { "quick-play": "enabled" })
+	var lobby_name := "Quick Play #%x" % [randi_range(0x10000000, 0xFFFFFFFF)]
+	return await _host_lobby(lobby_name, address, max_players, { "quick-play": "enabled" })
 
 func _host_noray() -> Error:
 	return await _noray_connector.host()

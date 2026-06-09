@@ -1,5 +1,8 @@
 extends Label
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+@onready var NetworkTimeSynchronizer:_NetworkTimeSynchronizer = Netfox.NetworkTimeSynchronizer
+
 func _process(_delta):
 	text = "Time: %.2f at tick #%d, clock at %.2f%%" % [NetworkTime.time, NetworkTime.tick, NetworkTime.clock_stretch_factor * 100.]
 	text += "\nClock offset: %.2fms, Remote offset: %.2fms" % [NetworkTime.clock_offset * 1000., NetworkTime.remote_clock_offset * 1000.]

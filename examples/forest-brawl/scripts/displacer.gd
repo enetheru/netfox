@@ -8,6 +8,9 @@ class_name Displacer
 var time_remaining := duration
 var fired_by: Node
 
+@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 @onready var synchronizer := $PredictiveSynchronizer as PredictiveSynchronizer
 
 static var _displacers := _Set.new()

@@ -6,6 +6,8 @@ class_name ScoreManager
 var _scores = {}
 var _brawlers = {}
 
+@onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
+
 func get_score(player: int) -> int:
 	return _scores.get(player, 0)
 
