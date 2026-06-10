@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dar1arcs7yy5i"]
+
+[ext_resource type="Script" uid="uid://b1pq16jtdkqr2" path="res://test/netfox.single_autoload/time_only.gd" id="1_fyfw7"]
+
+[node name="TimeOnly" type="VBoxContainer" unique_id=1306807270]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fyfw7")
+
+[node name="Header" type="HBoxContainer" parent="." unique_id=1167801031]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Header" unique_id=2013154637]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 72
+text = "Time Only Test"
+horizontal_alignment = 1
+
+[node name="Body" type="RichTextLabel" parent="." unique_id=1130887127]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Default Text"
+horizontal_alignment = 1

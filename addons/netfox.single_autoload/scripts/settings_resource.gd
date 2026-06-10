@@ -1,5 +1,6 @@
 @tool
 extends Resource
+class_name NetfoxSettings
 
 @export_category("general")
 
@@ -30,6 +31,9 @@ var supress_identity_peer_disconnected_warning:bool = false
 # NetfoxLogger._make_setting("netfox/logging/netfox_log_level"),
 
 @export_category('time')
+
+@export
+var time_sync_enabled:bool = true
 
 @export
 var tickrate:int = 30

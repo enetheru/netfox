@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="NetfoxSettings" format=3 uid="uid://htpl2iowt2lu"]
+
+[ext_resource type="Script" uid="uid://mq3y6sk5aedg" path="res://addons/netfox.single_autoload/scripts/settings_resource.gd" id="1_76tyj"]
+
+[resource]
+script = ExtResource("1_76tyj")
+metadata/_custom_type_script = "uid://mq3y6sk5aedg"

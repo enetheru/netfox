@@ -5,14 +5,11 @@ extends EditorPlugin
 ## Reviewing the original plugin script. it's whole purpose is to create the
 ## autoloads and update the settings, there is nothing else in here.
 ## [br]So lets look at the autoloads and see what is required of them.
-##[br]
-## [br]I'm onyl
 
 const Settings = preload("uid://6dax4xv0fr20")
 const SettingsResource = preload("uid://mq3y6sk5aedg")
 
 const Self:GDScript = preload("single_autoload.gd")
-
 
 const Author:String = "Samuel Nicholas (Enetheru)"
 const author:String = "enetheru"           # snake_case tag
@@ -26,8 +23,8 @@ static var plugin_path:String = plugin_dir.get_base_dir()
 
 static var ll := ENetfoxLogger.new('netfox', 'enetheru')
 
-static var opts:SettingsResource
-static var settings:Settings
+const default_settings:SettingsResource = preload("uid://htpl2iowt2lu")
+static var settings:Settings = Settings.new(default_settings, plugin_name)
 
 ## An array of custom types we've added that we can loop through on exit to
 ## remove.
@@ -109,9 +106,6 @@ func _on_project_settings_changed(
 func _init() -> void:
 	name = PluginName
 
-	opts = SettingsResource.new()
-	settings = Settings.new(opts, plugin_name)
-
 	if not ProjectSettings.has_setting("autoload/" + AutoloadName):
 		add_autoload_singleton(AutoloadName, plugin_path + "/servers/netfox.gd")
 
@@ -124,7 +118,7 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	if opts.clear_settings:
+	if default_settings.clear_settings:
 		settings.erase_prefix(plugin_name)
 
 	while not enabled_types.is_empty():
