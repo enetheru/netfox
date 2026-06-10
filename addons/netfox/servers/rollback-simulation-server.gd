@@ -114,8 +114,8 @@ func get_simulated_object() -> Object:
 func simulate(delta: float, tick: int) -> void:
 	_current_object = null
 
-	var input_snapshot := NetworkHistoryServer._get_rollback_input_snapshot(tick)
-	var state_snapshot := NetworkHistoryServer._get_rollback_state_snapshot(tick)
+	var input_snapshot := _history_server._get_rollback_input_snapshot(tick)
+	var state_snapshot := _history_server._get_rollback_state_snapshot(tick)
 	var nodes := _get_nodes_to_simulate(input_snapshot) # Result is sorted by tree order
 	_predicted_nodes.clear()
 

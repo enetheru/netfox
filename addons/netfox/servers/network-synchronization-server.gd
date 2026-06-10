@@ -170,7 +170,7 @@ func _synchronize_input(tick: int) -> void:
 		# Grab owned input objects
 		for input_subject in _rb_owned_input_properties.get_subjects():
 			# Grab state objects controlled by input
-			var controlled_nodes := RollbackSimulationServer._get_controlled_by(input_subject)
+			var controlled_nodes := _simulation_server._get_controlled_by(input_subject)
 
 			# Notify peers owning nodes about the input
 			for node in controlled_nodes:
@@ -186,7 +186,7 @@ func _synchronize_input(tick: int) -> void:
 	# Prepare snapshot package
 	for offset in _input_redundancy:
 		# Grab snapshot from NetworkHistoryServer
-		var snapshot := NetworkHistoryServer._get_rollback_input_snapshot(tick - offset)
+		var snapshot := _history_server._get_rollback_input_snapshot(tick - offset)
 		if not snapshot:
 			break
 
@@ -204,7 +204,7 @@ func _synchronize_state(tick: int) -> void:
 		return
 
 	# Grab snapshot from NetworkHistoryServer
-	var snapshot := NetworkHistoryServer._get_rollback_state_snapshot(tick)
+	var snapshot := _history_server._get_rollback_state_snapshot(tick)
 	if not snapshot:
 		# No data for tick
 		return
@@ -219,7 +219,7 @@ func _synchronize_state(tick: int) -> void:
 		is_full = true
 
 	# Check if we have history to diff to
-	var reference_snapshot := NetworkHistoryServer._get_rollback_state_snapshot(tick - 1)
+	var reference_snapshot := _history_server._get_rollback_state_snapshot(tick - 1)
 	if not reference_snapshot:
 		is_full = true
 
@@ -257,7 +257,7 @@ func _synchronize_sync_state(tick: int) -> void:
 		return
 
 	# Grab snapshot from NetworkHistoryServer
-	var snapshot := NetworkHistoryServer._get_synchronizer_state_snapshot(tick)
+	var snapshot := _history_server._get_synchronizer_state_snapshot(tick)
 	if not snapshot:
 		return
 
@@ -340,7 +340,7 @@ func _handle_input(sender: int, data: PackedByteArray):
 		snapshot.sanitize(sender)
 
 		_logger.trace("Ingesting input: %s", [snapshot])
-		if NetworkHistoryServer._merge_rollback_input(snapshot):
+		if _history_server._merge_rollback_input(snapshot):
 			_on_input.emit(snapshot)
 
 func _handle_full_state(sender: int, data: PackedByteArray):
@@ -367,7 +367,7 @@ func _handle_full_sync(sender: int, data: PackedByteArray):
 	var snapshot := _dense_serializer.read_from(sender, _sync_state_properties, buffer, true)
 	snapshot.sanitize(sender)
 
-	NetworkHistoryServer._merge_synchronizer_state(snapshot)
+	_history_server._merge_synchronizer_state(snapshot)
 	_logger.trace("Ingested sync state: %s", [snapshot])
 
 func _handle_diff_sync(sender: int, data: PackedByteArray):
@@ -377,13 +377,13 @@ func _handle_diff_sync(sender: int, data: PackedByteArray):
 	var snapshot := _sparse_serializer.read_from(sender, _sync_state_properties, buffer)
 	snapshot.sanitize(sender)
 
-	NetworkHistoryServer._merge_synchronizer_state(snapshot)
+	_history_server._merge_synchronizer_state(snapshot)
 	_logger.trace("Ingested sync diff: %s", [snapshot])
 
 func _ingest_state(sender: int, snapshot: _Snapshot) -> void:
 	snapshot.sanitize(sender)
 
-	NetworkHistoryServer._merge_rollback_state(snapshot)
+	_history_server._merge_rollback_state(snapshot)
 	_logger.trace("Ingested state: %s", [snapshot])
 
 	_on_state.emit(snapshot)

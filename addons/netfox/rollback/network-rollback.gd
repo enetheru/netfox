@@ -9,7 +9,6 @@ class_name _NetworkRollback
 ## @tutorial(Modifying objects during rollback): https://foxssake.github.io/netfox/latest/netfox/tutorials/modifying-objects-during-rollback/
 
 @onready var NetworkTime:_NetworkTime = Netfox.NetworkTime
-@onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
 @onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
 @onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
 @onready var RollbackLivenessServer:_RollbackLivenessServer = Netfox.RollbackLivenessServer
@@ -74,7 +73,7 @@ var display_offset: int:
 var display_tick: int:
 	get:
 		if enabled:
-			return maxi(0, NetworkTime.tick - NetworkRollback.display_offset)
+			return maxi(0, NetworkTime.tick - display_offset)
 		else:
 			return NetworkTime.tick
 	set(v):
