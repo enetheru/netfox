@@ -18,8 +18,6 @@ class_name _RollbackSimulationServer
 ## node.
 
 @onready var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
-@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
-@onready var RollbackLivenessServer:_RollbackLivenessServer = Netfox.RollbackLivenessServer
 @onready var NetworkPerformance:_NetworkPerformance = Netfox.NetworkPerformance
 
 var _history_server: _NetworkHistoryServer
@@ -232,5 +230,5 @@ func _init(p_history_server: _NetworkHistoryServer = null, p_liveness_server: _R
 
 func _ready():
 	# Ensure dependencies
-	if not _history_server: _history_server = NetworkHistoryServer
-	if not _liveness_server: _liveness_server = RollbackLivenessServer
+	if not _history_server: _history_server = Netfox.NetworkHistoryServer
+	if not _liveness_server: _liveness_server = Netfox.RollbackLivenessServer

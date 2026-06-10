@@ -9,7 +9,6 @@ class_name _NetworkTime
 
 @onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
 @onready var NetworkSynchronizationServer:_NetworkSynchronizationServer = Netfox.NetworkSynchronizationServer
-@onready var NetworkIdentityServer:_NetworkIdentityServer = Netfox.NetworkIdentityServer
 @onready var NetworkTimeSynchronizer:_NetworkTimeSynchronizer = Netfox.NetworkTimeSynchronizer
 
 ## Number of ticks per second.
@@ -585,7 +584,8 @@ func _loop() -> void:
 		after_tick_loop.emit()
 		NetworkHistoryServer._restore_synchronizer_state(tick)
 
-	NetworkIdentityServer.flush_queue()
+	if Netfox.settings.identity_server_enabled:
+		Netfox.NetworkIdentityServer.flush_queue()
 
 func _process(delta: float) -> void:
 	_process_delta = delta

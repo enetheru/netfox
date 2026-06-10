@@ -81,8 +81,6 @@ func is_server() -> bool:
 func _ready() -> void:
 	NetfoxLogger.register_tag(_get_peer_id_tag, -99)
 
-	enabled = ProjectSettings.get_setting(&"netfox/events/enabled", true)
-
 	# Automatically start ticking when entering multiplayer and stop when
 	# leaving multiplayer
 	on_server_start.connect(NetworkTime.start)

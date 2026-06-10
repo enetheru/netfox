@@ -16,14 +16,11 @@ class_name _NetworkSynchronizationServer
 ## Optionally, diff states can be used, sending only the property values that
 ## have changed, saving on bandwidth.
 
-var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
-@onready var RollbackSimulationServer:_RollbackSimulationServer = Netfox.RollbackSimulationServer
-@onready var NetworkHistoryServer:_NetworkHistoryServer = Netfox.NetworkHistoryServer
-@onready var NetworkIdentityServer:_NetworkIdentityServer = Netfox.NetworkIdentityServer
-@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
-@onready var NetworkPerformance:_NetworkPerformance = Netfox.NetworkPerformance
-
 const Command = _NetworkCommandServer.Command
+
+var NetworkRollback:_NetworkRollback = Netfox.NetworkRollback
+
+@onready var NetworkPerformance:_NetworkPerformance = Netfox.NetworkPerformance
 
 # Dependencies
 var _command_server: _NetworkCommandServer
@@ -308,10 +305,10 @@ func _init(
 
 func _ready():
 	# Ensure dependencies
-	if not _command_server: _command_server = NetworkCommandServer
-	if not _history_server: _history_server = NetworkHistoryServer
-	if not _identity_server: _identity_server = NetworkIdentityServer
-	if not _simulation_server: _simulation_server = RollbackSimulationServer
+	if not _command_server: _command_server = Netfox.NetworkCommandServer
+	if not _history_server: _history_server = Netfox.NetworkHistoryServer
+	if not _identity_server: _identity_server = Netfox.NetworkIdentityServer
+	if not _simulation_server: _simulation_server = Netfox.RollbackSimulationServer
 
 	# Setup serializers
 	_dense_serializer = _DenseSnapshotSerializer.new(_schemas, _identity_server)

@@ -15,8 +15,6 @@ class_name _NetworkTimeSynchronizer
 ## See [member sync_interval]
 const MIN_SYNC_INTERVAL := 0.1
 
-@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
-
 ## Time between sync samples, in seconds.
 ## Cannot be less than [member MIN_SYNC_INTERVAL]
 ## [br][br]
@@ -101,10 +99,10 @@ var remote_offset: float:
 		push_error("Trying to set read-only variable remote_offset")
 
 # Settings
-var _sync_interval: float = ProjectSettings.get_setting(&"netfox/time/sync_interval", 0.25)
-var _sync_samples: int = ProjectSettings.get_setting(&"netfox/time/sync_samples", 8)
-var _adjust_steps: int =ProjectSettings.get_setting(&"netfox/time/sync_adjust_steps", 8)
-var _panic_threshold: float = ProjectSettings.get_setting(&"netfox/time/recalibrate_threshold", 2.)
+var _sync_interval: float =  Netfox.settings.sync_interval
+var _sync_samples: int =  Netfox.settings.sync_samples
+var _adjust_steps: int = Netfox.settings.sync_adjust_steps
+var _panic_threshold: float = Netfox.settings.recalibrate_threshold
 
 var _active: bool = false
 static var _logger: NetfoxLogger = NetfoxLogger._for_netfox("NetworkTimeSynchronizer")
@@ -119,6 +117,7 @@ var _offset: float = 0.
 var _rtt: float = 0.
 var _rtt_jitter: float = 0.
 
+@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
 @onready var _cmd_ping := NetworkCommandServer.register_command(_handle_ping, MultiplayerPeer.TRANSFER_MODE_UNRELIABLE)
 @onready var _cmd_pong := NetworkCommandServer.register_command(_handle_pong, MultiplayerPeer.TRANSFER_MODE_UNRELIABLE)
 @onready var _cmd_req_time := NetworkCommandServer.register_command(_handle_request_timestamp, MultiplayerPeer.TRANSFER_MODE_RELIABLE)

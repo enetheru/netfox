@@ -20,8 +20,7 @@ class_name _NetworkIdentityServer
 ## nodes ( like RollbackSynchronizer ), and usually doesn't need to be done
 ## manually.
 
-@onready var NetworkCommandServer:_NetworkCommandServer = Netfox.NetworkCommandServer
-@onready var NetworkEvents:_NetworkEvents = Netfox.NetworkEvents
+const Command = _NetworkCommandServer.Command
 
 var _command_server: _NetworkCommandServer
 
@@ -33,7 +32,7 @@ var _identifier_by_name := {} # full name to NetworkIdentifier
 var _identifier_by_id := {} # peer to (id to NetworkIdentifier)
 var _identifier_by_local_id := {} # local id to NetworkIdentifier
 
-var _cmd_ids: _NetworkCommandServer.Command
+var _cmd_ids: Command
 var _packet_serializer := _IdentityPacketSerializer.new()
 
 var _has_warned_queue_length := false
@@ -47,12 +46,12 @@ func _init(p_command_server: _NetworkCommandServer = null):
 
 func _ready():
 	if not _command_server:
-		_command_server = NetworkCommandServer
+		_command_server = Netfox.NetworkCommandServer
 
 	_cmd_ids = _command_server.register_command(_handle_ids, MultiplayerPeer.TRANSFER_MODE_RELIABLE)
 
-	if NetworkEvents.enabled:
-		NetworkEvents.on_peer_leave.connect(erase_peer)
+	if Netfox.settings.events_enabled:
+		Netfox.NetworkEvents.on_peer_leave.connect(erase_peer)
 	else:
 		multiplayer.peer_disconnected.connect(erase_peer)
 		if not ProjectSettings.get_setting("netfox/general/supress_identity_peer_disconnected_warning", false):
